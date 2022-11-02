@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
+use App\Models\Album;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +24,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/user', function(){
+   return User::get();
+});
+
+Route::get('/albums', function (){
+    return \App\Models\Album::paginate(5);
+});

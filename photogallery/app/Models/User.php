@@ -41,4 +41,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function albums(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Album::class);
+    }
 }
