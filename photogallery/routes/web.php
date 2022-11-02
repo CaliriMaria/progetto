@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlbumsController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Album;
@@ -26,9 +27,9 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/user', function(){
-   return User::get();
+   return User::with('albums')->paginate(80);
 });
 
-Route::get('/albums', function (){
-    return \App\Models\Album::paginate(5);
-});
+Route::resource('albums', \App\Http\Controllers\AlbumsController::class);
+Route::delete('/albums/{album}/delete', [AlbumsController::class, 'delete']);
+
